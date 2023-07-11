@@ -849,20 +849,109 @@
 	
 	\section{Formulas}
 	
-	writing a formula inside the line like $x_2^{2} + x_1 = y$
+	To write formulas in LaTeX, you can use two different approaches:
 	
-	or after the line is over like following formula:
+	1. \textbf{Inline Formulas}: You can include a formula within the text itself by enclosing it between a pair of dollar signs (\$). For example, to write the formula $x_2^{2} + x_1 = y$, you can type your expression within the \texttt{\$...\$} like this:
+	\begin{verbatim}
+		$x_2^{2} + x_1 = y$
+	\end{verbatim}
 	
+	2. \textbf{Displayed Formulas}: If you want to display a formula on a separate line, you can use double dollar signs (\$\$). For example, to display the formula 
 	$$\sum_{i=0}^{\infty}\sqrt{x_i} = 0$$
+	you can type the formula between \texttt{\$\$} like this:
+	\begin{verbatim}
+		$$\sum_{i=0}^{\infty}\sqrt{x_i} = 0$$
+	\end{verbatim}
 	
-	talking about short keys available in TeXstudio at the left hand bar for writing a formula
-	about special characters
+	Here are some basic examples of using formulas in LaTeX:
 	
-	some examples of especial characters like $\sigma$ in formula, but at the end remembering all of them would be impossible to we have to Google or ChatGPT!
+	\begin{lstlisting}[style=latexstyle]
+		1) $x_2^{2} + x_1 = y$
+		2) $$\sum_{i=0}^{\infty}\sqrt{x_i} = 0$$
+	\end{lstlisting}
 	
+	When you compile the LaTeX code, it will generate the following output:
 	
+	\begin{enumerate}
+		\item $x_2^{2} + x_1 = y$
+		\item $$\sum_{i=0}^{\infty}\sqrt{x_i} = 0$$
+	\end{enumerate}
 	
+	By using these techniques, you can easily write and display formulas in your LaTeX documents.
 	
+	\subsection{More Examples}
+	
+	you can use the \codebox{align*} environment from the \codebox{amsmath} package to display equations without the need for double dollar signs \codebox{\$...\$}.\\
+	The \codebox{align*} environment is a recommended alternative for displaying equations in a multi-line format.
+	\\\\
+	The align* environment automatically handles the equation numbering and alignment for you. Here are some examples:
+	\\\\
+	\begin{lstlisting}[style=latexstyle]
+		\begin{align*}
+			\frac{1}{2} + \frac{3}{4} &= \frac{5}{4}
+		\end{align*}
+		
+		or
+		
+		$$\frac{1}{2} + \frac{3}{4} = \frac{5}{4}$$
+	\end{lstlisting}
+	
+	returns Equations with Fractions:
+	$$\frac{1}{2} + \frac{3}{4} = \frac{5}{4}$$
+	
+	\begin{lstlisting}[style=latexstyle]
+		\begin{align*}
+			2^3 &= 8 \\
+			x^{n+m} &= x^n \times x^m
+		\end{align*}
+		
+		or
+		
+		$$\large \displaylines{
+			2^3 = 8\\
+			x^{n+m} = x^n \times x^m
+		}$$
+	\end{lstlisting}
+	
+	returns Exponents and Indices:
+	\begin{align*}
+		2^3 &= 8 \\
+		x^{n+m} &= x^n \times x^m
+	\end{align*}
+	
+	refer the source code for the remaining:
+	
+	Square Roots:
+	\begin{align*}
+		\sqrt{16} &= 4 \\
+		\sqrt[n]{x^m} &= x^{\frac{m}{n}}
+	\end{align*}
+	
+	Greek Letters:
+	\begin{align*}
+		\alpha + \beta &= \gamma \\
+		\lambda \times \mu &= \nu
+	\end{align*}
+	
+	Matrices:
+	\[
+	\begin{bmatrix}
+		1 & 2 \\
+		3 & 4
+	\end{bmatrix}
+	\times
+	\begin{bmatrix}
+		5 & 6 \\
+		7 & 8
+	\end{bmatrix}
+	=
+	\begin{bmatrix}
+		19 & 22 \\
+		43 & 50
+	\end{bmatrix}
+	\]
+	
+	some examples of especial characters like $\sigma$ in formula, but at the end remembering all of them would be impossible to remember so we have to Google or ChatGPT!
 	
 	
 	
@@ -1203,8 +1292,8 @@
 		work in this course. You need to just be able to use it and make your documentation. But if your are interested, especially I am sure in future you will need to know it, the following description gives you more details.
 		
 	\end{tcolorbox}
-
-		\begin{enumerate}
+	
+	\begin{enumerate}
 		\item \textbf{Code box}: The lstlisting environment is part of the listings package in LaTeX, which provides a way to include code listings in your documents. You can make a default format for your lstlisting, for example:
 		
 		\begin{lstlisting}
@@ -1278,7 +1367,7 @@
 		\begin{lstlisting}
 			\newtcbox{\codebox}[1][gray]{on line, boxrule=0.2pt, colback=blue!5, colframe=#1, fontupper=\color{cherry}\ttfamily, arc=2pt, boxsep=0pt, left=2pt, right=2pt, top=3pt, bottom=2pt}
 		\end{lstlisting}
-	
+		
 		\begin{itemize}
 			\item \codebox{\textbackslash newtcbox}: This command is used to define a new box environment named \textbackslash codebox. It creates a colored and rounded box to display inline code snippets.
 			
@@ -1303,7 +1392,7 @@
 			\item \codebox{left=2pt, right=2pt, top=3pt, bottom=2pt}: These options define the padding (space) around the text within the box. You can adjust these values to change the amount of padding.
 			
 		\end{itemize}
-	
+		
 		You can use the \codebox{\textbackslash codebox} command to wrap inline code snippets and display them with a colored and rounded box.
 		
 		Make sure to define the necessary colors (cherry in this case) and load the required packages (tcolorbox, if not already loaded) in the preamble of your LaTeX document for the \codebox{\textbackslash newtcbox} command to work properly.
