@@ -2,8 +2,14 @@
 \usepackage{ragged2e} % load the package for justification
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
+
+
 \usepackage{pgfplots}
 \usepackage{tikz}
+\usepackage{pgf-pie}
+\usetikzlibrary{pgfplots.statistics}
+
+
 \usepackage{filecontents}
 \usepackage{multirow}
 \usepackage{amsmath}
@@ -40,6 +46,7 @@
 % Define a new color for "cherry" (dark red)
 \definecolor{cherry}{RGB}{148,0,25}
 \definecolor{codegreen}{rgb}{0,0.6,0}
+
 
 
 
@@ -682,6 +689,132 @@
 	
 	\section{Tables}
 	
+	
+	
+	LaTeX allows users to draw a table with the command \codebox{tabular}. Since LaTeX tables are in the same form, all tables can be created without using other external library functions.
+	
+	\subsection{Creating a simple table}
+	At first, let's create a simple 3 * 3 table with the given code below:
+	
+	\begin{lstlisting}[style=latexstyle]
+		\begin{tabular}{ c c c }
+			cell1 & cell2 & cell3 \\ 
+			cell4 & cell5 & cell6 \\  
+			cell7 & cell8 & cell9    
+		\end{tabular}
+	\end{lstlisting}
+	
+	The output is something like this:
+	
+	\begin{tabular}{ c c c }
+		cell1 & cell2 & cell3 \\ 
+		cell4 & cell5 & cell6 \\  
+		cell7 & cell8 & cell9    
+	\end{tabular}
+	
+	\begin{itemize}
+		\item \codebox{\textbackslash begin\{tabular\}} and \codebox{\textbackslash end\{tabular\}}. These LaTeX commands define a table environment. The tabular environment allows the table to be positioned and captioned accordingly.
+		\item \codebox{\{ c c c \}}. This command sets up there are three columns in this table, where each \codebox{c} represents one table column.
+		\item \codebox{cell 1 \& cell 2 \& cell 3 \textbackslash\textbackslash}. This command represents the first row of the table. There are three positions in a row, and each position has a value (e.g., \codebox{cell 1}, \codebox{cell 2}, \codebox{cell 3}). Between these values, there are many separator symbols \codebox{\&}, which divide different position values. Finally, when a row needs to be terminated and the remaining values are for the next line, we use the command \codebox{\textbackslash\textbackslash} to end a line and go to the next line.
+		\item \codebox{\textbackslash\textbackslash}. As mentioned, this command terminates the line and goes to the next line. It is unnecessary to add it to the last row of your table because there is no \"the next line\".
+	\end{itemize} 
+	
+	\subsection{Table settings}
+	
+	The previous section's table has poor readability because there are no grids between different rows and columns. Let's add some grids inside this table. Given this part of code:
+	
+	\begin{lstlisting}[style=latexstyle]
+		\begin{tabular}{|c|c|c|}
+			\hline
+			cell1 & cell2 & cell3 \\
+			\hline
+			cell4 & cell5 & cell6 \\ 
+			\hline
+			cell7 & cell8 & cell9 \\
+			\hline
+		\end{tabular}
+	\end{lstlisting}
+	
+	The output is something like this:
+	
+	\begin{tabular}{|c|c|c|}
+		\hline
+		cell1 & cell2 & cell3 \\ 
+		\hline
+		cell4 & cell5 & cell6 \\
+		\hline
+		cell7 & cell8 & cell9 \\
+		\hline
+	\end{tabular}
+	
+	\begin{itemize}
+		\item \codebox{\{|c|c|c|\}}. The insider command \codebox{|} inserts a single vertical grid line between each row or on the left or on the right of the table.
+		\item \codebox{\textbackslash hline}. This command adds a single horizontal grid line between each row or at the top or at the bottom of the table.
+	\end{itemize}
+	
+	We can not only build single-line grids, but also double-lines grids. Here is an example:
+	
+	\begin{tabular}{||c||c||c||}
+		\hline
+		\hline
+		cell1 & cell2 & cell3 \\ 
+		\hline
+		\hline
+		cell4 & cell5 & cell6 \\
+		\hline
+		\hline
+		cell7 & cell8 & cell9 \\
+		\hline
+		\hline
+	\end{tabular}
+	
+	\begin{itemize}
+		\item \codebox{\{||c||c||c||\}}. The insider command \codebox{||} inserts a double vertical grid line between each row or on the left or on the right of the table.
+		\item \codebox{\textbackslash hline\textbackslash hline}. This command adds a double horizontal grid line between each row or at the top or at the bottom of the table.
+	\end{itemize}
+	
+	We are also able to build tables in the center or in the right side of paper. Here is an example:
+	
+	\begin{lstlisting}[style=latexstyle]
+		\begin{center}
+			\begin{tabular}{|c|c|c|}
+				\hline
+				cell1 & cell2 & cell3 \\ 
+				\hline
+				cell4 & cell5 & cell6 \\
+				\hline
+				cell7 & cell8 & cell9 \\
+				\hline
+			\end{tabular}
+		\end{center}
+	\end{lstlisting}
+	
+	Here is the expected output:
+	
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			cell1 & cell2 & cell3 \\ 
+			\hline
+			cell4 & cell5 & cell6 \\
+			\hline
+			cell7 & cell8 & cell9 \\
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	\begin{itemize}
+		\item \codebox{\textbackslash begin\{center\}} and \codebox{\textbackslash end\{center\}}. These LaTeX commands define a center environment. The center environment allows the insider object to be moved to the middle (center)).
+	\end{itemize}
+	
+	There are other similar commands:
+	\begin{itemize}
+		\item \codebox{\textbackslash begin\{flushleft\}} and \codebox{\textbackslash end\{flushleft\}}. These LaTeX commands define a center environment. The center environment allows the insider object to be moved to the left border).
+		\item \codebox{\textbackslash begin\{flushright\}} and \codebox{\textbackslash end\{flushright\}}. These LaTeX commands define a center environment. The center environment allows the insider object to be moved to the left border).
+	\end{itemize}
+	
+	
+	
 	everyone should be able to make a table like this \textbf{Table 1}.
 	
 	\begin{table}[h!]
@@ -739,12 +872,86 @@
 	
 	\section{Plots}
 	
-	everyone should be able to plot a figure with given data like this \textbf{Figure 1}.
+	LaTeX provides various ways to create plots and graphs within a document. One popular method is using the tikzpicture environment in conjunction with the axis environment from the pgfplots package. Here's a brief overview of the syntax used in a basic plot.
+	
+	\subsection{Scatter and Line Plots}
+	
+	This code generates a scatter plot using LaTeX and the TikZ package (\codebox{\textbackslash usepackage\{tikz\}}) (\hyperref[fig:scatter_pedram]{\textbf{Figure 1}}).
+
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel = {X},
+				ylabel = {Y},
+				title = {Scatter Plot}
+				]
+				\addplot[only marks, color=red] coordinates {
+					(1, 2)
+					(2, 4)
+					(3, 1)
+					(4, 3)
+					(5, 5)
+				};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This is a scatter Plot}
+		\label{fig:scatter_pedram}
+	\end{figure}
+	
+	\begin{itemize}
+		
+		\item \codebox{\textbackslash begin\{figure\}} and \codebox{\textbackslash end\{figure\}}: These LaTeX commands define a floating figure environment, enclosing the TikZ picture. The figure environment allows the plot to be positioned and captioned accordingly.
+		
+		\item \codebox{\textbackslash centering}: This command centers the plot horizontally within the figure environment.
+		
+		\item \codebox{\textbackslash begin\{tikzpicture\}} and \codebox{\textbackslash end\{tikzpicture\}}: These commands establish the TikZ environment for creating graphical elements.
+		
+		\item \codebox{\textbackslash begin\{axis\}[options]} and \codebox{\textbackslash end\{axis\}}: These commands define an axis environment within the TikZ picture. The axis environment provides a framework for plotting data and customizing the axes, labels, and other visual elements.
+		
+		\item \codebox{xlabel = \{X\}} and \codebox{ylabel = \{Y\}}: These options set the labels for the x-axis and y-axis, respectively.
+		
+		\item \codebox{title = \{Scatter Plot\}}: This option assigns a title to the plot.
+		
+		\item \codebox{\textbackslash addplot[only marks] coordinates \{ ... \};}: This command adds a scatter plot to the axis environment. The only marks option specifies that only markers (points) should be displayed, rather than connecting the markers with lines. The coordinates keyword is followed by the data points enclosed in braces. Each data point is specified as (x, y) within parentheses. The option \codebox{color = red} also defines the color of dots.
+		
+		\item \codebox{\textbackslash caption\{...\}}: this command adds a caption and numbering to the table.
+		
+		\item \codebox{\textbackslash label\{fig:scatter\_pedram\}}: by this command, I can make an inline link to this \hyperref[fig:scatter_pedram]{\textbf{Figure \ref*{fig:scatter_pedram}}}. You will learn about this in \hyperref[sec:Reference]{\textcolor{orange!80!black}{Reference}}.
+		
+	\end{itemize}
+	
+	With the same format, you can make a line plot by removing the option \codebox{[only marks]} (\hyperref[fig:line_Pedram]{\textbf{Figure \ref*{fig:line_Pedram}}}):
+	
+	
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel = {X},
+				ylabel = {Y},
+				title = {Line Plot}
+				]
+				\addplot [color = blue] coordinates {
+					(1, 2)
+					(2, 4)
+					(3, 1)
+					(4, 3)
+					(5, 5)
+				};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This is a line plot}
+		\label{fig:line_Pedram}
+	\end{figure}
+	
+	You want to have multiple lines? Take a look at \hyperref[fig:multiple_line]{\textbf{Figure \ref*{fig:multiple_line}}}:
 	
 	\begin{figure}[ht]
 		\centering
 		\begin{tikzpicture}
-			\begin{axis}[        xlabel={$NNZ/row$},        ylabel={GB/s},        xmin=6, xmax=19,        ymin=40, ymax=95,        xtick={7.67,14.01,17.96},        legend style={at={(0.3,0.8)},anchor=north},        ]
+			\begin{axis}[        xlabel={NNZ/row},        ylabel={GB/s},        xmin=6, xmax=19,        ymin=40, ymax=95,        xtick={7.67,14.01,17.96},        legend style={at={(0.3,0.8)},anchor=north},        ]
 				\addplot[color=blue,mark=*] coordinates {
 					(7.67,53.944108)
 					(14.01,50.797288)
@@ -762,14 +969,191 @@
 			\end{axis}
 		\end{tikzpicture}
 		\caption{GB/s vs. NNZ/row (Double precision).}
-		\label{fig:my_label}
+		\label{fig:multiple_line}
+	\end{figure}
+	
+	\clearpage
+	
+	\subsection{Bar Plot}
+	
+	The bar plot is usually used to show the value of different categories. Let's say if I have code using four different algorithms (A, B, C, D) computing $a \times x$ where a and x are matrices. The time taken by each algorithm can be represented by \hyperref[fig:bar_plot]{\textbf{Figure \ref*{fig:bar_plot}}}.
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel = {Algorithm (category)},
+				ylabel = {Time},
+				title = {Bar Plot},
+				symbolic x coords={A, B, C, D},
+				ybar,
+				bar width=0.5cm,
+				enlargelimits=0.15,
+				xtick=data,
+				]
+				\addplot coordinates {
+					(A, 2)
+					(B, 4)
+					(C, 1)
+					(D, 3)
+				};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Bar Plot}
+		\label{fig:bar_plot}
 	\end{figure}
 	
 	
+	The stacked bar plot is used when each category also has sub-sections. Let's say if each algorithm has three parts and you want to also mention the time taken by each part in the same plot (\hyperref[fig:stacked_ped]{\textbf{Figure \ref*{fig:stacked_ped}}}).
 	
 	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel = {Category},
+				ylabel = {Value},
+				title = {Stacked Bar Plot},
+				ybar stacked,
+				bar width=15pt,
+				legend style={at={(0.5,-0.15)},
+					anchor=north,legend columns=-1},
+				symbolic x coords={A, B, C, D},
+				xtick=data,
+				ymin=0
+				]
+				\addplot [fill=blue] coordinates {
+					(A, 2)
+					(B, 4)
+					(C, 1)
+					(D, 3)
+				};
+				\addplot [fill=red] coordinates {
+					(A, 3)
+					(B, 1)
+					(C, 2)
+					(D, 4)
+				};
+				\addplot [fill=green] coordinates {
+					(A, 4)
+					(B, 2)
+					(C, 3)
+					(D, 1)
+				};
+				\legend{part 1, part 2, part 3}
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This is a stacked Bar Plot.}
+		\label{fig:stacked_ped}
+	\end{figure}
 	
 	
+	In this example, the \codebox{ybar} stacked option is used to stack the bars vertically, and the bar width option is used to set the width of each bar. The symbolic x coords option is used to specify the categories on the x-axis. You can adjust the values, colors, labels, and other properties to fit your needs.
+	
+	Make sure you have the \codebox{pgfplots} package installed and included in your LaTeX environment for this code to work properly.
+	
+	\clearpage
+	
+	
+	\subsection{Histogram}
+	
+	Histograms are commonly used in various fields for visualizing the distribution of data. Some areas where histograms are frequently employed include:
+	
+	\begin{itemize}
+		\item Statistics: Histograms are widely used in statistical analysis to depict the frequency distribution of a dataset. They provide insights into the central tendency, spread, and shape of the data, allowing statisticians to make inferences and draw conclusions.
+		
+		\item Data Analysis: Histograms help analysts explore and understand the characteristics of a dataset. By examining the shape and peaks of the histogram, analysts can identify patterns, outliers, and potential data issues.
+		
+		\item Quality Control: Histograms play a vital role in quality control processes, especially in manufacturing industries. They are used to assess the distribution of measurements, identify process variations, and determine whether the produced items meet the required specifications.
+		
+		\item Market Research: In market research, histograms are employed to analyze survey responses, consumer preferences, and market trends. They aid in visualizing the distribution of responses, enabling researchers to gain insights into customer behavior and preferences.
+		
+		\item Image Processing: Histograms are utilized in image processing to enhance images and perform various operations such as contrast adjustment, equalization, and thresholding. They help analyze the distribution of pixel intensities within an image.
+		
+		\item Finance and Economics: In finance and economics, histograms are often used to examine the distribution of financial returns, market volatility, asset prices, and other economic indicators. They assist in understanding the risk and behavior of financial markets.
+	\end{itemize} 
+	
+	These are just a few examples of the many areas where histograms are employed. Histograms provide a valuable tool for visualizing data distributions and are widely used across various domains for data exploration, analysis, and decision-making. \hyperref[fig:his_ped]{\textbf{Figure \ref*{fig:his_ped}}} shows how to make one.
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				xlabel = {Value},
+				ylabel = {Frequency},
+				title = {Histogram},
+				ybar interval,
+				xtick=data
+				]
+				\addplot+[hist={bins=5}] table[row sep=\\,y index=0] {
+					data\\
+					1\\ 2\\ 2\\ 3\\ 4\\
+					4\\ 4\\ 5\\ 5\\ 5\\
+					5\\ 6\\ 7\\ 7\\ 7\\
+					8\\ 9\\ 9\\ 10\\ 10\\
+				};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{This is a histogram.}
+		\label{fig:his_ped}
+	\end{figure}
+	
+	\clearpage
+	
+	\subsection{Pie Chart}
+	
+	Pie chart are used any time you want to show the percentages of items. To create a pie chart in LaTeX, you can use the \codebox{pgf-pie} package. Make sure you have it installed and then include the package in your LaTeX document (\hyperref[fig:pie_pedram]{\textbf{Figure \ref*{fig:pie_pedram}}}):
+	
+	\begin{figure}[htbp]
+		\centering
+		\begin{tikzpicture}
+			\pie{30/A, 20/B, 10/C, 40/D}
+		\end{tikzpicture}
+		\caption{This is a pie Chart}
+		\label{fig:pie_pedram}
+	\end{figure}
+	
+	In this example, the placement options \codebox{[htbp]} are used within the figure environment. The options specify the preferred positions for the figure: h for "here", t for "top", b for "bottom", and p for "page" (a dedicated float page). The order of the options determines the priority for placement. Remove this option and compile you file to see the location of plot!
+	
+	In this example, the \codebox{pie} command is provided by the pgf-pie package, which creates a pie chart. Each slice of the pie is represented by a percentage value followed by a label. You can adjust the values and labels according to your needs.
+	
+	Make sure you have the \codebox{pgf-pie} package installed and included in your LaTeX environment for this code to work properly.
+	
+	
+	\subsection{Box Plot}
+	
+	This plot is usually used in Data Science. To create a box plot in LaTeX using pgfplots, you can use the statistics library by including \codebox{\textbackslash usetikzlibrary\{pgfplots.statistics\}} at before \codebox{\textbackslash begin\{document\}}.
+	
+	
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}
+			\begin{axis}[
+				title = {Box Plot},
+				ylabel = {Value},
+				boxplot/draw direction=y
+				]
+				\addplot+[
+				boxplot prepared={
+					median=5,
+					upper quartile=7,
+					lower quartile=3,
+					upper whisker=10,
+					lower whisker=2
+				}
+				] coordinates {};
+			\end{axis}
+		\end{tikzpicture}
+		\caption{Box Plot}
+	\end{figure}
+	
+	\begin{tcolorbox}[myboxstyle]
+		
+		{\Large \textbf{\textcolor{cherry}{Tips!}}} These are only few examples of chart, you can always ask chatGPT based on your problem to give you some samples. Make sure if you are working for a company, you are not sharing sensitive information with ChatGPT. Give it some sample data not the real one! 
+		
+	\end{tcolorbox}
+	
+	\clearpage
 	
 	
 	
@@ -779,9 +1163,152 @@
 	
 	\section{C Code Box or Inline}
 	
+	To include C code in your LaTeX document, you have two options: using a code box or including code inline.
+	
+	\subsection{Code Box}
+	
+	To display a block of C code with syntax highlighting and line numbers, you can use the \codebox{lstlisting} environment from the \codebox{listings} package. Here's an example:
+	
+	\begin{lstlisting}[language=C, caption={Example of C code in a code box}]
+		#include <stdio.h>
+		int main() {
+			printf("Hello, McMaster!\n");
+			return 0;
+		}
+	\end{lstlisting}
+	
+	In this example, the \codebox{language} option is set to \codebox{C} to enable C language syntax highlighting. The \codebox{caption} option is used to provide a descriptive caption for the code box.
+	
+	\subsection{Inline Code}
+	
+	To include a small snippet of C code inline with your text, you can use the \codebox{\textbackslash codebox\{\}} command. Here's an example:
+	
+	\codebox{printf("Hello LaTeX")}
+	
+	Remember to include the necessary packages in the preamble of your LaTeX document, such as \texttt{\\usepackage\{listings\}} for code formatting and syntax highlighting.
+	
+	Compile the LaTeX code to see the C code box and inline code snippet rendered in your document.
 	
 	
+	\begin{tcolorbox}[myboxstyle]
+		
+		{\Large \textbf{\textcolor{cherry}{More details!}}} You don't need to know how
+		
+		\codebox{\textbackslash codebox\{\}}
+		
+		and
+		
+		\codebox{\textbackslash begin\{lstlisting\} ... \textbackslash end\{lstlisting\}}
+		
+		work in this course. You need to just be able to use it and make your documentation. But if your are interested, especially I am sure in future you will need to know it, the following description gives you more details.
+		
+	\end{tcolorbox}
+
+		\begin{enumerate}
+		\item \textbf{Code box}: The lstlisting environment is part of the listings package in LaTeX, which provides a way to include code listings in your documents. You can make a default format for your lstlisting, for example:
+		
+		\begin{lstlisting}
+			\lstset{
+				language=C,
+				basicstyle=\ttfamily,
+				backgroundcolor=\color{blue!5},
+				keywordstyle=\color{blue},
+				commentstyle=\color{codegreen},
+				stringstyle=\color{red},
+				showstringspaces=false,
+				breaklines=true,
+				frame=single,
+				rulecolor=\color{lightgray!35},
+				numbers=none,
+				numberstyle=\tiny,
+				numbersep=5pt,
+				tabsize=1,
+				alsoletter={\#},
+				otherkeywords={\#}
+			}
+			
+		\end{lstlisting}    
+		
+		\begin{itemize}
+			\item \codebox{language=C}: Sets the language for syntax highlighting. In this case, it is set to C. You can change it to match the desired language or remove this line if you don't want syntax highlighting.
+			
+			\item \codebox{basicstyle=\textbackslash ttfamily}: Sets the basic style for the code listing. \codebox{\textbackslash ttfamily} selects a monospaced font, suitable for code.
+			
+			\item \codebox{backgroundcolor=\textbackslash color\{blue!5\}}: Sets the background color for the code listing. In this example, it is set to a light blue color with a transparency of 5\%.
+			
+			\item \codebox{keywordstyle=\textbackslash color\{blue\}}: Sets the color for keywords in the code. In this example, keywords will be displayed in blue.
+			
+			\item \codebox{commentstyle=\textbackslash color\{codegreen\}}: Sets the color for comments in the code. In this example, comments will be displayed in a custom color named codegreen.
+			
+			\item \codebox{stringstyle=\textbackslash color\{red\}}: Sets the color for strings (e.g., text within quotation marks) in the code. In this example, strings will be displayed in red.
+			
+			\item \codebox{showstringspaces=false}: Specifies whether to show spaces within strings. In this example, spaces within strings will not be visible.
+			
+			\item \codebox{breaklines=true}: Allows automatic line breaking if a line of code exceeds the width of the listing. This ensures that the code fits within the specified frame.
+			
+			\item \codebox{frame=single}: Adds a frame around the code listing. In this example, a single line frame will be displayed.
+			
+			\item \codebox{rulecolor=\textbackslash color\{lightgray!35\}}: Sets the color for the frame of the code listing. In this example, the frame color is a light gray with a transparency of 35\%.
+			
+			\item numbers=none: Disables line numbering for the code listing.
+			
+			\item \codebox{numberstyle=\textbackslash tiny}: Sets the style for line numbers. In this example, line numbers will be displayed in a tiny font size.
+			
+			\item \codebox{numbersep=5pt}: Specifies the distance between line numbers and the code.
+			
+			\item \codebox{tabsize=1}: Sets the tab size for indentation. In this example, each tab will be equivalent to one character width.
+			
+			\item \codebox{alsoletter={\textbackslash \#}}: Specifies additional characters that should be treated as letters. In this example, the \# symbol is included.
+			
+			\item \codebox{otherkeywords={\textbackslash \#}}: Specifies additional keywords. In this example, the \# symbol is included as a keyword.
+			
+		\end{itemize}
+		
+		These settings can be defined in the preamble of your LaTeX document, or you can define them locally within a specific lstlisting environment.
+		
+		To use the listings package, you need to include the following line in your LaTeX document's preamble: \codebox{\textbackslash usepackage\{listings\}}. After including this package the mentioned settings will be added before \codebox{\textbackslash begin\{document\}}. 
+		
+		Additionally, you may need to load other packages depending on the colors and symbols used. In the provided example, the code assumes the usage of the color package to define custom colors. You can include the following line in your preamble to load it: \codebox{\textbackslash usepackage\{xcolor\}}. 
+		
+		Make sure to have both the listings and xcolor packages installed in your LaTeX environment to use the provided settings.
+		
+		
+		\item \textbf{Inline Code}: Here I have defined a new environment called \textbf{codebox}. This a name I chose to remember during writing, you can choose any thing. and I can use it during writing by \codebox{\textbackslash codebox\{\}}. This is how I have defined the environment before \codebox{\textbackslash begin\{document\}}:
+		
+		\begin{lstlisting}
+			\newtcbox{\codebox}[1][gray]{on line, boxrule=0.2pt, colback=blue!5, colframe=#1, fontupper=\color{cherry}\ttfamily, arc=2pt, boxsep=0pt, left=2pt, right=2pt, top=3pt, bottom=2pt}
+		\end{lstlisting}
 	
+		\begin{itemize}
+			\item \codebox{\textbackslash newtcbox}: This command is used to define a new box environment named \textbackslash codebox. It creates a colored and rounded box to display inline code snippets.
+			
+			\item \codebox{\textbackslash codebox}: This is the name of the defined box environment, which can be used to wrap inline code snippets.
+			
+			\item \codebox{[1][gray]}: This optional parameter allows you to specify the color of the box frame. By default, if no color is specified, the box frame will be gray.
+			
+			\item \codebox{on line}: This option specifies that the box should be placed on the same line as the text.
+			
+			\item \codebox{boxrule=0.2pt}: This sets the thickness of the box's frame.
+			
+			\item \codebox{colback=blue!5}: This defines the background color of the box. In this example, it is set to a light blue with a transparency of 5\%.
+			
+			\item \codebox{colframe=\#1}: This sets the color of the box's frame. The \#1 parameter refers to the optional parameter passed when using \textbackslash codebox, allowing you to customize the frame color.
+			
+			\item \codebox{fontupper=\textbackslash color\{cherry\}\textbackslash ttfamily}: This sets the font style for the text inside the box. It uses the color cherry (which should be defined elsewhere) and a monospaced font (\codebox{\textbackslash ttfamily}) to display the code.
+			
+			\item \codebox{arc=2pt}: This sets the radius of the rounded corners of the box.
+			
+			\item \codebox{boxsep=0pt}: This sets the spacing between the text and the box's frame.
+			
+			\item \codebox{left=2pt, right=2pt, top=3pt, bottom=2pt}: These options define the padding (space) around the text within the box. You can adjust these values to change the amount of padding.
+			
+		\end{itemize}
+	
+		You can use the \codebox{\textbackslash codebox} command to wrap inline code snippets and display them with a colored and rounded box.
+		
+		Make sure to define the necessary colors (cherry in this case) and load the required packages (tcolorbox, if not already loaded) in the preamble of your LaTeX document for the \codebox{\textbackslash newtcbox} command to work properly.
+		
+	\end{enumerate}
 	
 	
 	
@@ -798,7 +1325,7 @@
 	
 	
 	
-	\section{Reference}
+	\section{Reference} \label{sec:Reference}
 	
 	% to remove the hyperline rectangle
 	
@@ -822,7 +1349,21 @@
 	
 	\textbf{linking a text file to a website, to a part of document, or mentioning an article as reference}
 	
+	linking  to table or figure
 	
+	\hyperref[fig:scatter_pedram]{\textbf{Figure \ref*{fig:scatter_pedram}}}, we can see the scatter plot representing the relationship between X and Y.
+	
+	In this updated example, the \codebox{\textbackslash hyperref} command is used within the caption to create a hyperlink. You can use \codebox{\textbackslash protect}
+	
+	by
+	
+	\begin{lstlisting}
+		caption{\protect\hyperref[fig:scatter]{Figure \ref*{fig:scatter}}: This is a scatter Plot}
+	\end{lstlisting}
+	
+	command is used to ensure that the hyperlink is properly handled in the list of figures and other locations where the caption may be repeated. The label fig:scatter is assigned to the figure, and the \codebox{\textbackslash ref*} command is used to avoid generating additional clickable links within the sentence.
+	
+	By modifying the caption format in this way, the entire "Figure 1" text will function as a hyperlink to the corresponding plot.
 	
 	
 	\clearpage
