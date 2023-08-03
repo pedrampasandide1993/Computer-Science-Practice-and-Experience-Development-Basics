@@ -11,12 +11,12 @@
 #define num_outputs 2         // N4 = 2
 #define initial_range 0.2
 
-#define Learning_rate 0.005
+#define Learning_rate 0.005 // 0 - 1, 0.01 - 0.0001
 #define epochs 100000
 
 #define MAX_ROWS 48120
 #define MAX_COLS 4
-#define train_split 0.2 // 20 percent of data will be used for train
+#define train_split 0.1 // 0.3 percent of data will be used for train
 
 double sigmoid(double x)
 {
@@ -144,10 +144,10 @@ int main()
     // Close the file
     fclose(file);
 
-    // int num_train = MAX_ROWS *train_split;
-    // int num_val = MAX_ROWS *(1-train_split); ##########################################################################
-    int num_train = 120;
-    int num_val = MAX_ROWS - 120;
+    int num_train = MAX_ROWS *train_split;
+    int num_val = MAX_ROWS *(1-train_split);
+    // int num_train = 120;
+    // int num_val = MAX_ROWS - 120;
 
     double X_train[num_train][num_inputs];
     double Y_train[num_train][num_outputs];
@@ -388,7 +388,7 @@ int main()
 
         if (ep%100==0)
         {
-            double a4_eval_train[num_outputs][num_train];
+        double a4_eval_train[num_outputs][num_train];
         ForwardPass(num_train, X_train, Y_train,
                     W2, W3, W4,
                     b2, b3, b4,
@@ -422,7 +422,7 @@ int main()
         }
 
         // Calculate the cost and divide by num_train
-        double cost = sum_squared_diff / num_train;
+        double cost_train = sum_squared_diff / num_train;
 
         
 
@@ -472,25 +472,13 @@ int main()
         free(a4_val);
 
         // Calculate the cost and divide by num_train
-        cost = sum_squared_diff / num_val;
+        double cost_val = sum_squared_diff / num_val;
 
         printf("epoch %d:\n", ep);
-        printf("Train Cost      %lf,    Accuracy: %.2f%%\n",cost, accuracy_train);
-        printf("Validation Cost %lf,    Accuracy: %.2f%%\n\n",cost, accuracy_val);
+        printf("Train Cost      %lf,    Accuracy: %.2f%%\n",cost_train, accuracy_train);
+        printf("Validation Cost %lf,    Accuracy: %.2f%%\n\n",cost_val, accuracy_val);
 
 
         }
- 
-        //     for (int i = 0; i < num_train; i++)
-        //     {
-        //         printf("%lf,  %lf", a4_eval_train[0][i], a4_eval_train[1][i]);
-        //         printf("      %lf,  %lf\n", Y_train[i][0], Y_train[i][1]);
-
-        //         break;
-        //     }
-
-        // ###################################################### Evaluation of accuracies ends
     }
-
-    int ped = 1;
 }
