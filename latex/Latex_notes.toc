@@ -1,0 +1,29 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
+\contentsline {section}{\numberline {2}How to Install Latex}{5}{section.2}%
+\contentsline {subsection}{\numberline {2.1}How to Create the First Latex Doc}{6}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}How to Install TeXstudio as the IDE for LaTeX}{7}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Short Keys in TeXstudio}{7}{section.3}%
+\contentsline {section}{\numberline {4}LaTeX Basics}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The General Format}{8}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Left, Right, Centre Alignment}{9}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Bold, Italic, Font Size, and Other!}{10}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Break Line or Page}{11}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Default Settings}{11}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Items}{12}{section.5}%
+\contentsline {section}{\numberline {6}Tables}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Creating a simple table}{14}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Table settings}{15}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Formulas}{18}{section.7}%
+\contentsline {subsection}{\numberline {7.1}More Examples}{19}{subsection.7.1}%
+\contentsline {section}{\numberline {8}Plots}{20}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Scatter and Line Plots}{20}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Bar Plot}{24}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Histogram}{26}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Pie Chart}{28}{subsection.8.4}%
+\contentsline {subsection}{\numberline {8.5}Box Plot}{28}{subsection.8.5}%
+\contentsline {section}{\numberline {9}C Code Box or Inline}{30}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Code Box}{30}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Inline Code}{30}{subsection.9.2}%
+\contentsline {section}{\numberline {10}Tables of Contents}{34}{section.10}%
+\contentsline {section}{\numberline {11}Reference}{37}{section.11}%
+\contentsfinish 
