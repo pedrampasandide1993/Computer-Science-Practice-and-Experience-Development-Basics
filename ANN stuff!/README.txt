@@ -1,4 +1,4 @@
-With didn't have time to talk about the optional topic in this course, section ANNs.
+We didn't have time to talk about the optional topic in this course, section ANNs.
 However, some might be intersted in to work in this area.
 
 The file `main.c` is a C code written from scratch for a Neural Network with:
