@@ -16,6 +16,6 @@ A complex programming practice can be:
 	c) being able to have multiple outputs not just 2
 
 
-Before, jumping to this project you need to study the section related to ANN, then if you have any questions you can contact me.
+Before jumping to this project you need to study the section related to ANN, then if you have any questions you can contact me.
 
 Good luck
